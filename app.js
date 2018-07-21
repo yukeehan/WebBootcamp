@@ -24,8 +24,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-// mongoose.connect('mongodb://yukee:heshan0426@ds143461.mlab.com:43461/yukeeproject');
-mongoose.connect('mongodb://localhost:27017/yelp_camp', { useNewUrlParser: true });
+mongoose.connect('mongodb://yukee:heshan0426@ds143461.mlab.com:43461/yukeeproject');
+// mongoose.connect('mongodb://localhost:27017/yelp_camp', { useNewUrlParser: true });
 
 // Passport Configuration
 app.use(require("express-session")({
