@@ -1,3 +1,4 @@
+// require('dotenv').config();
 var express       = require("express"),
     app           = express(),
     request       = require("request"),
@@ -24,8 +25,12 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-mongoose.connect('mongodb://yukee:heshan0426@ds143461.mlab.com:43461/yukeeproject');
-// mongoose.connect('mongodb://localhost:27017/yelp_camp', { useNewUrlParser: true });
+// mongoose.connect("mongodb//localhostmongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+
+app.locals.moment = require("moment");
+
 
 // Passport Configuration
 app.use(require("express-session")({

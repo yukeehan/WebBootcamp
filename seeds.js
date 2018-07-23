@@ -28,28 +28,28 @@ function seedDB(){
             console.log(err);
         } else {
             console.log("removed campground");
-            // Add a few campgrounds
-            data.forEach(function(seed){
-                Campground.create(seed, function(err, campground){
-                    if(err){
-                        console.log(err);
-                    } else {
-                        console.log("a campground added!");
-                        Comment.create({
-                            text: "This place is awsome!",
-                            author: "yukee"
-                        }, function(err, comment){
-                            if(err){
-                                console.log(err);
-                            } else {
-                                campground.comments.push(comment);
-                                campground.save();
-                                console.log("created a comment");
-                            }
-                        })
-                    }
-                });
-            });            
+            // // Add a few campgrounds
+            // data.forEach(function(seed){
+            //     Campground.create(seed, function(err, campground){
+            //         if(err){
+            //             console.log(err);
+            //         } else {
+            //             console.log("a campground added!");
+            //             Comment.create({
+            //                 text: "This place is awsome!",
+            //                 author: "yukee"
+            //             }, function(err, comment){
+            //                 if(err){
+            //                     console.log(err);
+            //                 } else {
+            //                     campground.comments.push(comment);
+            //                     campground.save();
+            //                     console.log("created a comment");
+            //                 }
+            //             })
+            //         }
+            //     });
+            // });            
         }
     }); 
     // Add a few comments

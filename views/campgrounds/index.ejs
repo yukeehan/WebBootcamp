@@ -3,25 +3,23 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1>Welcome To YelpCamp!</h1>
-            <p>View Out Hand-picked Campgrounds From All Over The World</p>
+            <h1 class="display-4">Welcome To YelpCamp!</h1>
+            <p class="lead">View Out Hand-picked Campgrounds From All Over The World</p>
             <p>
-                <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add A New Campground</a>
+                <a class="btn btn-primary btn-lg" role="button" href="/campgrounds/new">Add A New Campground</a>
             </p>
         </div>
     </header>
-    
+
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% campgrounds.forEach(function(campground){ %>
             <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                   <div class="image-thumb" style="background-image: url(<%= campground.image %>)"></div>
-                   <div class="caption">
-                       <h4><%= campground.name %></h4>
-                   </div>
-                   <p>
-                       <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
-                   </p>
+                <div class="card">
+                    <img class="card-img-top" src="<%= campground.image %>" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= campground.name %></h5>
+                        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
+                    </div>
                 </div>
             </div>
         <% }); %>

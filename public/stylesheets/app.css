@@ -1,11 +1,9 @@
-.image-thumb {
-  width: 100%;
-  height: 250px;
-  background-size: cover;
-  background-position: center center;
+.card-img-top {
+  height: 150px;
 }
-.thumbnail img {
-  width: 100%;
+
+.card{
+  margin: 1.5em auto;
 }
 
 .thumbnail {
@@ -15,6 +13,17 @@
 .thumbnail .caption-full {
   padding: 9px;
 }
+.card-img-top .show{
+  height:100%;
+}
+#campgroundName{
+  font-size: 1.40em;
+}
 #delete_form{
   display: inline;
+}
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
 }

@@ -14,12 +14,15 @@ router.get("/", function(req, res){
 
 //register form
 router.get("/register", function(req, res){
-    res.render("authentication/register");
+    res.render("authentication/register", {page: 'register'});
 });
 
 //register logic
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
+    if(req.body.AdminCode === "heshan"){
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error",err.message);
@@ -34,7 +37,7 @@ router.post("/register", function(req, res){
 
 // Login Form
 router.get("/login", function(req, res){
-    res.render("authentication/login");
+    res.render("authentication/login", {page: 'login'});
 });
 
 // Login Logic using middleware 
