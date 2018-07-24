@@ -16,6 +16,14 @@
 .card-img-top .show{
   height:100%;
 }
+.avatar {
+    vertical-align: middle;
+    margin: 10px auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
 #campgroundName{
   font-size: 1.40em;
 }

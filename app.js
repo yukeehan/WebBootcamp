@@ -25,9 +25,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-// mongoose.connect("mongodb//localhostmongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+mongoose.connect("mongodb//localhostmongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+// mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 
 app.locals.moment = require("moment");
 

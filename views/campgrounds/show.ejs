@@ -17,7 +17,7 @@
                     <p class="float-right">$<%= Number(campground.price).toFixed(2) %>/Night</p>
                     <p class="card-text" id="campgroundName"><strong><%= campground.name %></strong></p>
                     <p>
-                        <em>Submitted By <%= campground.author.username %>, <%= moment(campground.createAt).fromNow() %></em>
+                        <em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a>, <%= moment(campground.createAt).fromNow() %></em>
                     </p>
                     <p class="card-text"><%= campground.description %></p>
                     <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
