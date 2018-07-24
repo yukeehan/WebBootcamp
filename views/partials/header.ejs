@@ -29,7 +29,7 @@
                         <a class="nav-link" href="/register"><i class="plus icon"></i>Sign Up</a>
                     </li>  
                     <% } else { %>
-                        <li class="nave-item"><a class="nav-link" href="#"><i class="user circle outline icon"></i>Hello! <%= currentUser.username %></a></li>
+                        <li class="nave-item"><a class="nav-link" href="/users/<%= currentUser._id %>"><i class="user circle outline icon"></i>Hello! <%= currentUser.username %></a></li>
                         <li class="nave-item"><a class="nav-link" href="/logout">Logout</a></li>
                     <% } %>
             </ul>

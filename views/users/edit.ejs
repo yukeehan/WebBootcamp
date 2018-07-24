@@ -1,0 +1,83 @@
+<% include ../partials/header %>
+
+    <form action="/users/<%= user._id %>?_method=PUT" method=POST>
+        <div class="contianer">
+            <div class="contianer" style="margin-left: 125px">
+                <h1><%= user.firstName %> <%= user.lastName %>'s Profile</h1>    
+            </div>
+            <div class="contianer" style="margin: auto 80px">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 80%; margin: auto, 2px">
+                            <img src="<%= user.avatar %>" alt="Avatar" class="avatar">
+                            <div class="card-body">
+                                <input class="form-control" type="text" value="<%= user.avatar %>" name="user[avatar]" placeholder="avatar url" required>
+                            </div>
+                            <div class="card-text text-center">Email: <%= user.email %></div>
+                            <div class="card-header mt-5">
+                                <Strong>Campgrounds</Strong>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <% campground.forEach(function(campground){ %>
+                                    <a href="/campgrounds/<%= campground._id %>"><li class="list-group-item"><%= campground.name %></li></a>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-md-8">
+                        <div class="card"  style="width: 90%;">
+                            <div class="card-header">
+                                <h3 class="card-title ml-2"><%= user.username %></h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tbody>
+                                        <tr scope="row">
+                                            <td>First Name</td>
+                                            <td><input class="form-control" type="text" name="user[firstName]" placeholder="first name" value="<%= user.firstName %>" required></td>
+                                        </tr>
+                                        <tr scope="row">
+                                            <td>Last Name</td>
+                                            <td><input class="form-control" type="text" name="user[lastName]" placeholder="last name" value="<%= user.lastName %>" required></td>                                
+                                        </tr>
+                                        <tr scope="row">
+                                            <td>Gender</td> 
+                                            <td><select class="custom-select" id="gender" name="user[gender]">
+                                                    <% if(!user.gender){ %>
+                                                        <option selected style="color: rgba(0,0,0,0.5)">Choose...</option>
+                                                    <% }else { %>
+                                                        <option selected style="color: rgba(0,0,0,0.5)"><%= user.gender %></option>
+                                                    <% } %>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                                <option value="Rather not to say">Rather not to say</option>
+                                            </select></td>
+                                        </tr>
+                                        <tr scope="row">
+                                            <td>Email</td>
+                                            <td><input class="form-control" type="email" name="user[email]" placeholder="email" value="<%= user.email %>" required></td>
+                                        </tr>
+                                        <tr scope="row">
+                                            <td>Hobbies</td>
+                                            <td><textarea class="form-control" line="3" name="user[hobby]"><%= user.hobby %></textarea></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-md btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+
+
+
+
+
+<% include ../partials/footer %>

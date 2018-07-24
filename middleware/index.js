@@ -1,5 +1,6 @@
 var Campground = require("../models/campground");
 var Comment = require("../models/comment");
+var User = require("../models/user");
 
 var middlewareObj = {};
 
@@ -44,6 +45,27 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 res.redirect("back");
             } else {
                 if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
+                    next();
+                } else {
+                    req.flash("error", "You Don't Have Permission To Access It");
+                    res.redirect("back");
+                }
+            }
+        })
+    } else {
+        req.flash("error", "Please Login First");
+        res.redirect("back");
+    }
+}
+
+middlewareObj.checkProfileOwnership = function(req, res, next){
+    if(req.isAuthenticated()){
+        User.findById(req.params.id, function(err, foundUser){
+            if(err || !foundUser){
+                req.flash("error", "User not found");
+                res.redirect("back");
+            } else {
+                if(foundUser._id.equals(req.user._id)){
                     next();
                 } else {
                     req.flash("error", "You Don't Have Permission To Access It");

@@ -39,25 +39,24 @@
                                 </tr>
                                 <tr scope="row">
                                     <td>Gender</td> 
-                                    <td>Female</td>
+                                    <td><%= user.gender %></td>
                                 </tr>
                                 <tr scope="row">
                                     <td>Email</td>
                                     <td><%= user.email %></td>
                                 </tr>
                                 <tr scope="row">
-                                    <td>Hobby</td>
-                                    <td>Camping</td>
+                                    <td>Hobbies</td>
+                                    <td><%= user.hobby %></td>
                                 </tr>
                             </tbody>
-                            
                         </table>
+                        <a href="/users/<%= user._id %>/edit"><button class="btn btn-sm btn-primary">Edit</button></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 </div>
 
 
