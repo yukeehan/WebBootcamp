@@ -1,16 +1,13 @@
-// require('dotenv').config();
 var express       = require("express"),
     app           = express(),
-    request       = require("request"),
     bodyParser    = require("body-parser"),
     mongoose      = require("mongoose"),
     passport      = require("passport"),
     LocalStrategy = require("passport-local"),
     flash         = require("connect-flash"),
-    Campground    = require("./models/campground"),
     seedDB        = require("./seeds"),
-    Comment       = require("./models/comment"),
     User          = require("./models/user"),
+    cookieParser  = require("cookie-parser"),
     methodOverride = require("method-override")
     
 var campgroundsRoutes = require("./routes/campgrounds"),
@@ -24,6 +21,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.use(cookieParser('secret'));
 
 mongoose.connect("mongodb//localhostmongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 

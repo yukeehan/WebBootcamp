@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="h3 my-5 font-weight-normal">Forgot</h1>
+    </div>
+    <div style="width:30%; margin: 25px auto;">
+        <form action="/forgot" method="POST">
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" type="email" name="email" placeholder="email" required> 
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Send Reset Password Link</button>
+            </div>
+        </form> 
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
