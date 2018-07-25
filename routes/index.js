@@ -54,7 +54,9 @@ router.get("/login", function(req, res){
 // Login Logic using middleware 
 router.post("/login", passport.authenticate("local",{
     successRedirect:"/campgrounds",
-    failureRedirect:"/login",})
+    failureRedirect:"/login",
+    failureFlash: true
+    })
 );
 
 
@@ -67,9 +69,7 @@ router.get("/logout", function(req, res){
 
 // Forgot Form
 router.get('/forgot', function(req, res){
-    res.render('authentication/forgot', {
-        user: req.user
-    });
+    res.render('authentication/forgot', {user: req.user});
 });
 
 // Forgot Logic
@@ -124,7 +124,7 @@ router.post('/forgot', function(req, res, next){
     });
 });
 
-// Password Reset Route
+// Password Reset Form
 router.get('/reset/:token', function(req, res){
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires:{ $gt: Date.now() } }, function(err, user){
         if(!user){
@@ -147,8 +147,9 @@ router.post('/reset/:token', function(req, res) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }
-        if(req.body.password === req.body.confirm) {
-          user.setPassword(req.body.password, function(err) {
+        if(req.body.newPW === req.body.confirmPW) {
+                                eval(require("locus"));
+          user.setPassword(req.body.newPW, function(err) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
 
@@ -188,6 +189,44 @@ router.post('/reset/:token', function(req, res) {
     res.redirect('/campgrounds');
   });
 });
+
+
+// Change Password Form
+router.get("/:id/reset", middlewareObj.checkProfileOwnership, function(req, res, next){
+     async.waterfall([
+        function(done){
+            crypto.randomBytes(20, function(err, buf){
+                var token = buf.toString('hex');
+                done(err, token);
+            });
+        },
+        function(token, done){
+            User.findById(req.params.id, function(err, foundUser){
+
+                if(err){
+                    console.log(err);
+                    res.redirect("back");
+                } else {
+                    foundUser.resetPasswordToken = token;
+                    foundUser.resetPasswordExpires = Date.now() + 360000;  // 1 hour
+                    foundUser.save();
+
+                    res.render('authentication/reset_while_login',{
+                        user: foundUser,
+                        token: foundUser.resetPasswordToken
+                        // done(err, token, foundUser);
+                    });
+                }
+            });
+        }
+    ], function(err){
+        if(err) return next(err);
+        res.redirect('back');
+    });
+});
+
+
+
 
 
 // USER PROFILE ROUTE
