@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
-var Campground = require("../models/campground");
 var middlewareObj = require("../middleware");
 var nodemailer    = require("nodemailer"),
     async         = require("async"),
@@ -148,7 +147,6 @@ router.post('/reset/:token', function(req, res) {
           return res.redirect('back');
         }
         if(req.body.newPW === req.body.confirmPW) {
-                                eval(require("locus"));
           user.setPassword(req.body.newPW, function(err) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
@@ -211,7 +209,7 @@ router.get("/:id/reset", middlewareObj.checkProfileOwnership, function(req, res,
                     foundUser.resetPasswordExpires = Date.now() + 360000;  // 1 hour
                     foundUser.save();
 
-                    res.render('authentication/reset_while_login',{
+                    res.render('authentication/reset',{
                         user: foundUser,
                         token: foundUser.resetPasswordToken
                         // done(err, token, foundUser);
@@ -222,62 +220,6 @@ router.get("/:id/reset", middlewareObj.checkProfileOwnership, function(req, res,
     ], function(err){
         if(err) return next(err);
         res.redirect('back');
-    });
-});
-
-
-
-
-
-// USER PROFILE ROUTE
-router.get("/users/:id", function(req, res){
-    User.findById(req.params.id, function(err, foundUser){
-        if(err){
-            req.flash("error","user not found");
-            res.redirect("back");
-        } else {
-            Campground.find().where('author.id').equals(foundUser._id).exec(function(err, foundCampground){
-                if(err){
-                    req.flash("error", "something went wrong");
-                    res.redirect("/");
-                } else {
-                    res.render("users/show", {user: foundUser, campground: foundCampground});
-                }
-            })
-        }
-    });
-});
-
-// USER PROFILE EDIT ROUTE
-router.get("/users/:id/edit", middlewareObj.checkProfileOwnership, function(req, res){
-    User.findById(req.params.id, function(err, foundUser){
-        if(err){
-            req.flash("error", "something went wrong");
-            res.redirect("back");
-        } else {
-            Campground.find().where('author.id').equals(foundUser._id).exec(function(err, foundCampground){
-                if(err){
-                    req.flash("error", "something went wrong");
-                    res.redirect("back");
-                }   else {
-                    res.render("users/edit", {user: foundUser, campground: foundCampground});
-                }
-            });
-        }
-    })
-});
-
-// USER PROFILE UPDATE ROUTE
-router.put("/users/:id", function(req, res){
-    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
-        if(err){
-            console.log(err);
-            req.flash("error","Update profile failed");
-            res.redirect("back");
-        } else {
-            req.flash("success", "Profile successfully updated!");
-            res.redirect("/users/" + req.params.id)
-        }
     });
 });
 

@@ -12,7 +12,8 @@ var express       = require("express"),
     
 var campgroundsRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index"),
-    commentsRoutes = require("./routes/comments")
+    commentsRoutes = require("./routes/comments"),
+    userProfileRoutes = require("./routes/user_profile")
     
 // seedDB(); //seed the database
 
@@ -52,6 +53,7 @@ app.use(function(req, res, next){
 app.use("/campgrounds", campgroundsRoutes);
 app.use(indexRoutes);
 app.use("/campgrounds/:id/comments",commentsRoutes);
+app.use(userProfileRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("yelpCamp is started!");
