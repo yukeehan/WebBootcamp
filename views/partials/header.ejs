@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
           <a class="navbar-brand" href="/">YelpCamp</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,6 +21,10 @@
               </li>
             </ul>
             <ul class="navbar-nav mr-2">
+                <form class="form-inline mt-2 mt-md-0" action="/campgrounds" method="GET">
+                        <input type="text" class="form-control mr-sm-2" style="height: 80%" name="search" placeholder="Campground Search...">
+                        <input type="submit" class="btn btn-outline-light btn-sm mr-4 my-2 my-sm-0" value="Search">
+                </form>
                 <% if(!currentUser){ %>
                     <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
                         <a class="nav-link" href="/login"><i class="user outline icon"></i>Login</a>

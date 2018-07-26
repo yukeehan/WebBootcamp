@@ -12,6 +12,12 @@
     </header>
 
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% if(noMatch !== undefined){ %>
+            <div class="col-md-12">
+                <img class="rounded" style="width:15%;" src="https://telegramguides.com/wp-content/uploads/2018/04/pusheen-cat-telegram-sticker-14.png">
+                <h1><%= noMatch %></h1>
+            </div>
+        <% } %>
         <% campgrounds.forEach(function(campground){ %>
             <div class="col-md-3 col-sm-6">
                 <div class="card">
