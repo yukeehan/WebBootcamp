@@ -45,26 +45,32 @@ router.get("/register", function(req, res){
 });
 
 //register logic
-router.post("/register", upload.single('avatar'), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        // add cloudinary url for the image to the campground object under avatar property
-        req.body.newUser.username = req.body.username; // can't put it as newUser[username] in ejs files
-        req.body.newUser.avatar = result.secure_url;
-        req.body.newUser.avatarId = result.public_id;
-        if(req.body.AdminCode === "heshan"){
+router.post("/register", upload.single('avatar'), async function(req, res){
+    req.body.newUser.username = req.body.username; // can't put it as newUser[username] in ejs files
+    if(req.body.AdminCode === "heshan"){
             req.body.newUser.isAdmin = true;
         }
-        User.register(req.body.newUser, req.body.password, function(err, user){
-            // eval(require("locus"));
-            if(err){
-                req.flash("error",err.message);
-                return res.redirect("/register");
-            }
-            passport.authenticate("local")(req, res, function(){
-                req.flash("success","Thanks for register! Nice to meet you " + user.username + "!");
-                res.redirect("/campgrounds");
-            });
+    if(req.file){
+        await cloudinary.uploader.upload(req.file.path, function(result) {
+            // add cloudinary url for the image to the campground object under avatar property
+            req.body.newUser.avatar = result.secure_url;
+            req.body.newUser.avatarId = result.public_id;
         });
+    } else {
+        req.body.newUser.avatar = "https://res.cloudinary.com/yukeehan/image/upload/v1532897637/blue_avatar-default.png";
+        req.body.newUser.avatarId = 0;
+    }
+    User.register(req.body.newUser, req.body.password, function(err, user){
+        // eval(require("locus"));
+        if(err){
+            req.flash("error",err.message);
+            return res.redirect("/register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            req.flash("success","Thanks for register! Nice to meet you " + user.username + "!");
+            res.redirect("/campgrounds");
+        });
+        
     });
 });
 
