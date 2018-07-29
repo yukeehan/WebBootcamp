@@ -13,9 +13,15 @@
                         <Strong>Campgrounds</Strong>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <% campground.forEach(function(campground){ %>
-                            <a href="/campgrounds/<%= campground._id %>"><li class="list-group-item"><%= campground.name %></li></a>
-                        <% }); %>
+                        <% if(campground.length > 0){ %>
+                            <% campground.forEach(function(campground){ %>
+                                <a href="/campgrounds/<%= campground._id %>"><li class="list-group-item"><%= campground.name %></li></a>
+                            <% }); %>
+                        <% } else { %>
+                            <li class="list-group-item">
+                                You have not create any post yet. Let's <a href="/campgrounds/new">create one!</a>
+                            </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -61,8 +67,5 @@
     </div>
 </div>
 
-
-
-
-
-<% include ../partials/footer %>
+    </body>
+</html>

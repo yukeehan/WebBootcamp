@@ -4,10 +4,10 @@
         <h1 class="h3 my-5 font-weight-normal">Create a new campground</h1>
     </div>
     <div style="width:30%; margin:25px auto;">
-        <form action="/campgrounds" method="POST"> 
+        <form action="/campgrounds" method="POST" enctype="multipart/form-data"> 
         <div class="form-group">
             <label>Campground Name</label>
-            <input class="form-control" type="text" name="name" placeholder="name" required>    
+            <input class="form-control" type="text" name="campground[name]" placeholder="name" required>    
         </div>
         <div class="form-group">
             <label for="location">Location</label>
@@ -15,15 +15,15 @@
         </div>
         <div class="form-group">
             <label>Price per Night</label>
-            <input class="form-control" type="number" placeholder="0.00" name="price" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" required>
+            <input class="form-control" type="number" placeholder="0.00" name="campground[price]" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" required>
         </div>
         <div class="form-group">
-            <label>Image Url</label>    
-            <input class="form-control" type="text" name="image" placeholder="image" required>
+            <label>Image</label>    
+            <input class="form-control" id="image" type="file" name="image" accept="image/*" required>
         </div>
         <div class="form-group">
             <label>Description</label>
-            <input class="form-control" type="text" name="description" placeholder="description" required>
+            <input class="form-control" type="text" name="campground[description]" placeholder="description" required>
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block">Submit</button>
@@ -33,4 +33,5 @@
     </div>
 </div>
 
-<% include ../partials/footer %>
+    </body>
+</html>

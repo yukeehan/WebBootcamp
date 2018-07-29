@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<form action="/users/<%= user._id %>?_method=PUT" method=POST>
+<form action="/users/<%= user._id %>?_method=PUT" method=POST enctype="multipart/form-data">
     <div class="contianer">
         <div class="contianer" style="margin-left: 125px">
             <h1><%= user.firstName %> <%= user.lastName %>'s Profile</h1>    
@@ -11,7 +11,7 @@
                     <div class="card" style="width: 80%; margin: auto, 2px">
                         <img src="<%= user.avatar %>" alt="Avatar" class="avatar">
                         <div class="card-body">
-                            <input class="form-control" type="text" value="<%= user.avatar %>" name="user[avatar]" placeholder="avatar url">
+                            <input class="form-control" type="file" value="<%= user.avatar %>" name="avatar" placeholder="avatar url" accept="image/*">
                         </div>
                         <div class="card-text text-center">Email: <%= user.email %></div>
                         <div class="card-header mt-5">
@@ -76,4 +76,5 @@
     </div>
 </form>
 
-<% include ../partials/footer %>
+    </body>
+</html>

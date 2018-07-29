@@ -23,6 +23,24 @@
     height: 150px;
     border-radius: 50%;
 }
+.footer-anchor {
+  color: black;
+}
+.bd-footer{
+  text-align: center;
+  width: 95%;
+  margin: auto auto;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
 #campgroundName{
   font-size: 1.40em;
 }

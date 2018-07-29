@@ -6,6 +6,29 @@ var middlewareObj = require("../middleware");
 var nodemailer    = require("nodemailer"),
     async         = require("async"),
     crypto        = require("crypto");
+    
+// Cloudinary Config
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'yukeehan', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 
 router.get("/", function(req, res){
@@ -22,25 +45,25 @@ router.get("/register", function(req, res){
 });
 
 //register logic
-router.post("/register", function(req, res){
-    var newUser = new User({
-        username: req.body.username, 
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        avatar: req.body.avatar
-    });
-    if(req.body.AdminCode === "heshan"){
-        newUser.isAdmin = true;
-    }
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
-            req.flash("error",err.message);
-            return res.redirect("/register");
+router.post("/register", upload.single('avatar'), function(req, res){
+    cloudinary.uploader.upload(req.file.path, function(result) {
+        // add cloudinary url for the image to the campground object under avatar property
+        req.body.newUser.username = req.body.username; // can't put it as newUser[username] in ejs files
+        req.body.newUser.avatar = result.secure_url;
+        req.body.newUser.avatarId = result.public_id;
+        if(req.body.AdminCode === "heshan"){
+            req.body.newUser.isAdmin = true;
         }
-        passport.authenticate("local")(req, res, function(){
-            req.flash("success","Thanks for register! Nice to meet you " + user.username + "!");
-            res.redirect("/campgrounds");
+        User.register(req.body.newUser, req.body.password, function(err, user){
+            // eval(require("locus"));
+            if(err){
+                req.flash("error",err.message);
+                return res.redirect("/register");
+            }
+            passport.authenticate("local")(req, res, function(){
+                req.flash("success","Thanks for register! Nice to meet you " + user.username + "!");
+                res.redirect("/campgrounds");
+            });
         });
     });
 });
@@ -65,6 +88,10 @@ router.get("/logout", function(req, res){
     req.flash("success","Logged Out Successfully!");
     res.redirect("/campgrounds");
 });
+
+//=====================================
+//    Forgot & Change Password Routes
+//=====================================
 
 // Forgot Form
 router.get('/forgot', function(req, res){
@@ -188,7 +215,6 @@ router.post('/reset/:token', function(req, res) {
   });
 });
 
-
 // Change Password Form
 router.get("/:id/reset", middlewareObj.checkProfileOwnership, function(req, res, next){
      async.waterfall([
@@ -221,6 +247,11 @@ router.get("/:id/reset", middlewareObj.checkProfileOwnership, function(req, res,
         if(err) return next(err);
         res.redirect('back');
     });
+});
+
+// About Me Page Route
+router.get("/about", function(req, res){
+    res.render("about");
 });
 
 module.exports = router;

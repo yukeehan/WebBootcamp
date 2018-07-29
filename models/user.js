@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     avatar: String,
+    avatarId: String,
     gender: String,
     hobby: String,
     isAdmin: {type:Boolean, default: false},
