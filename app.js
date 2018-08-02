@@ -10,7 +10,7 @@ var express       = require("express"),
     cookieParser  = require("cookie-parser"),
     methodOverride = require("method-override")
     
-var campgroundsRoutes = require("./routes/campgrounds"),
+var pinkbeautyRoutes = require("./routes/pinkbeauty"),
     indexRoutes = require("./routes/index"),
     commentsRoutes = require("./routes/comments"),
     userProfileRoutes = require("./routes/user_profile")
@@ -50,9 +50,9 @@ app.use(function(req, res, next){
     next();
 });
 
-app.use("/campgrounds", campgroundsRoutes);
+app.use("/pinkbeauty", pinkbeautyRoutes);
 app.use(indexRoutes);
-app.use("/campgrounds/:id/comments",commentsRoutes);
+app.use("/pinkbeauty/:id/comments",commentsRoutes);
 app.use(userProfileRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){

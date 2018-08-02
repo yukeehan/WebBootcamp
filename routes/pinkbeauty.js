@@ -49,12 +49,12 @@ router.get("/", function(req, res){
 
             if(err){
                 req.flash("error","Something went wrong. Please try again");
-                res.redirect("/campgrounds");
+                res.redirect("/pinkbeauty");
             } else if(foundCamp.length < 1) {
                 noMatch = "No Campground Match. Please Try Again";
-                res.render("campgrounds/index", {campgrounds: foundCamp, page:'campgrounds', noMatch: noMatch}); 
+                res.render("campgrounds/index", {campgrounds: foundCamp, page:'pinkbeauty', noMatch: noMatch}); 
             } else {
-                res.render("campgrounds/index", {campgrounds:foundCamp, page:'campgrounds', noMatch: noMatch}); 
+                res.render("campgrounds/index", {campgrounds:foundCamp, page:'pinkbeauty', noMatch: noMatch}); 
             }
         })
     } else {
@@ -63,7 +63,7 @@ router.get("/", function(req, res){
             if(err){
                 console.log(err);
             } else {
-              res.render("campgrounds/index", {campgrounds:allCampgrounds, page:'campgrounds', noMatch: noMatch}); 
+              res.render("campgrounds/index", {campgrounds:allCampgrounds, page:'pinkbeauty', noMatch: noMatch}); 
             }
         }); 
     }
@@ -83,7 +83,7 @@ router.get("/:id", function(req, res){
         // eval(require("locus"));
         if(err || !foundCampground){
             req.flash("error", "Campground not found");
-            res.redirect("/campgrounds");
+            res.redirect("/pinkbeauty");
         } else {
             // render show template with that campground
             res.render("campgrounds/show",{campground: foundCampground});
@@ -121,7 +121,7 @@ router.post("/", middlewareObj.isLoggedIn, upload.single('image'), function(req,
               req.flash('error', "Something went wrong, please try again");
               return res.redirect('back');
             }
-                res.redirect('/campgrounds/' + campground.id);
+                res.redirect('/pinkbeauty/' + campground.id);
             });
         });
     });
@@ -133,7 +133,7 @@ router.get("/:id/edit", middlewareObj.checkCampgroundOwner, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
             req.flash("error","Something goes wrong, please try again");
-            res.redirect("/campgrounds/" + req.params.id);
+            res.redirect("/pinkbeauty/" + req.params.id);
         } else {
             res.render("campgrounds/edit", {campground: foundCampground});
         }
@@ -150,7 +150,7 @@ router.put("/:id", middlewareObj.checkCampgroundOwner, upload.single('image'), f
         }
         Campground.findById(req.params.id, async function(err, foundCamp){
             if(err){
-                req.flash("error", "Campground not found");
+                req.flash("error", "Post not found");
                 res.redirect("back");
             } else{
                 if(req.file){
@@ -171,7 +171,7 @@ router.put("/:id", middlewareObj.checkCampgroundOwner, upload.single('image'), f
                 foundCamp.location = data[0].formattedAddress;
                 foundCamp.save();
                 req.flash("success","Successfully Updated!");
-                res.redirect("/campgrounds/" + foundCamp._id);
+                res.redirect("/pinkbeauty/" + foundCamp._id);
             }
         });
     });
@@ -182,10 +182,10 @@ router.delete("/:id", middlewareObj.checkCampgroundOwner, function(req, res){
     Campground.findByIdAndRemove(req.params.id, function(err){
         if(err){
             req.flash("error","Something goes wrong, please try again");
-            res.redirect("/campgrounds" + req.params.id);
+            res.redirect("/pinkbeauty" + req.params.id);
         } else {
             req.flash("error","Successfully deleted!");
-            res.redirect("/campgrounds");
+            res.redirect("/pinkbeauty");
         }
     });
 });

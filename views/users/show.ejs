@@ -1,16 +1,19 @@
-<% include ../partials/header %>
-<div class="contianer">
+<% include ../partials/profile_header %>
+<style>
+    
+</style>
+<div class="contianer mt-5">
     <div class="contianer" style="margin-left: 125px">
-        <h1><%= user.firstName %> <%= user.lastName %>'s Profile</h1>    
+        <h1><%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %>'s Profile</h1>    
     </div>
     <div class="contianer" style="margin: auto 80px">
         <div class="row">
             <div class="col-md-4">
                 <div class="card" style="width: 80%; margin: auto, 2px">
                     <img src="<%= user.avatar %>" alt="Avatar" class="avatar">
-                    <div class="card-text text-center">Email: <%= user.email %></div>
+                    <div class="card-text text-center"><i class="envelope outline icon"></i>Email: <%= user.email %></div>
                     <div class="card-header mt-5">
-                        <Strong>Campgrounds</Strong>
+                        <Strong>Posts</Strong>
                     </div>
                     <ul class="list-group list-group-flush">
                         <% if(campground.length > 0){ %>
@@ -19,7 +22,7 @@
                             <% }); %>
                         <% } else { %>
                             <li class="list-group-item">
-                                You have not create any post yet. Let's <a href="/campgrounds/new">create one!</a>
+                                You have not create any post yet. Let's <a class="resetPw" href="/campgrounds/new">create one!</a>
                             </li>
                         <% } %>
                     </ul>
@@ -58,7 +61,7 @@
                             </tbody>
                         </table>
                         <% if(currentUser && currentUser._id.equals(user._id)){ %>
-                            <a href="/users/<%= user._id %>/edit"><button class="btn btn-sm btn-primary">Edit</button></a>
+                            <a href="/users/<%= user._id %>/edit"><button>Edit</button></a>
                         <% } %>
                     </div>
                 </div>

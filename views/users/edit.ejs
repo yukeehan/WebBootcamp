@@ -1,9 +1,9 @@
-<% include ../partials/header %>
+<% include ../partials/profile_header %>
 
 <form action="/users/<%= user._id %>?_method=PUT" method=POST enctype="multipart/form-data">
-    <div class="contianer">
+    <div class="contianer mt-5">
         <div class="contianer" style="margin-left: 125px">
-            <h1><%= user.firstName %> <%= user.lastName %>'s Profile</h1>    
+            <h1><%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %>'s Profile</h1>    
         </div>
         <div class="contianer" style="margin: auto 80px">
             <div class="row">
@@ -11,11 +11,11 @@
                     <div class="card" style="width: 80%; margin: auto, 2px">
                         <img src="<%= user.avatar %>" alt="Avatar" class="avatar">
                         <div class="card-body">
-                            <input class="form-control-file" type="file" value="<%= user.avatar %>" name="avatar" placeholder="avatar url" accept="image/*">
+                            <input class="form-control-file avatar-text" type="file" value="<%= user.avatar %>" name="avatar" placeholder="avatar url" accept="image/*">
                         </div>
                         <div class="card-text text-center">Email: <%= user.email %></div>
                         <div class="card-header mt-5">
-                            <Strong>Campgrounds</Strong>
+                            <Strong>Posts</Strong>
                         </div>
                         <ul class="list-group list-group-flush">
                             <% campground.forEach(function(campground){ %>
@@ -66,8 +66,8 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button class="btn btn-md btn-primary">Update</button>
-                            <p class="mt-3"><a href="/<%= user._id %>/reset">Reset Password</a></p>
+                            <button>Update</button>
+                            <p class="mt-3 resetPw"><a href="/<%= user._id %>/reset">Reset Password</a></p>
                         </div>
                     </div>
                 </div>

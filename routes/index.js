@@ -70,7 +70,7 @@ router.post("/register", upload.single('avatar'), async function(req, res){
         }
         passport.authenticate("local")(req, res, function(){
             req.flash("success","Thanks for register! Nice to meet you " + user.username + "!");
-            res.redirect("/campgrounds");
+            res.redirect("/pinkbeauty");
         });
         
     });
@@ -83,7 +83,7 @@ router.get("/login", function(req, res){
 
 // Login Logic using middleware 
 router.post("/login", passport.authenticate("local",{
-    successRedirect:"/campgrounds",
+    successRedirect:"back",
     failureRedirect:"/login",
     failureFlash: true
     })
@@ -94,7 +94,7 @@ router.post("/login", passport.authenticate("local",{
 router.get("/logout", function(req, res){
     req.logout();
     req.flash("success","Logged Out Successfully!");
-    res.redirect("/campgrounds");
+    res.redirect("/pinkbeauty");
 });
 
 //=====================================
@@ -219,7 +219,7 @@ router.post('/reset/:token', function(req, res) {
       });
     }
   ], function(err) {
-    res.redirect('/campgrounds');
+    res.redirect('/pinkbeauty');
   });
 });
 

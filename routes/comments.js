@@ -42,7 +42,7 @@ router.post("/", middlewareObj.isLoggedIn, function(req, res){
                         } else {
                             req.flash("success","Successfully added comment!");
                             // redirct to the campground show page
-                            res.redirect("/campgrounds/"+req.params.id); 
+                            res.redirect("/pinkbeauty/"+req.params.id); 
                         }
                     });
                 }
@@ -56,7 +56,7 @@ router.get("/:comment_id/edit", middlewareObj.checkCommentOwnership, function(re
     Campground.findById(req.params.id, function(err, foundCampground){
         if(err || !foundCampground){
             req.flash("error", "Campground not found");
-            res.redirect("/campgrounds");
+            res.redirect("/pinkbeauty");
         } else {
             Comment.findById(req.params.comment_id, function(err, foundComment){
                 if(err || !foundComment){
@@ -80,7 +80,7 @@ router.put("/:comment_id", middlewareObj.checkCommentOwnership, function(req, re
             res.redirect("/");
         } else {
             req.flash("success","Successfully updated comment!");
-            res.redirect("/campgrounds/"+ req.params.id);
+            res.redirect("/pinkbeauty/"+ req.params.id);
         }
     });
 });
@@ -92,7 +92,7 @@ router.delete("/:comment_id", middlewareObj.checkCommentOwnership, function(req,
             res.redirect("back");
         } else {
             req.flash("success","Successfully deleted comment");
-            res.redirect("/campgrounds/" + req.params.id);
+            res.redirect("/pinkbeauty/" + req.params.id);
         }
     })
 });

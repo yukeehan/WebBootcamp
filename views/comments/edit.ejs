@@ -8,13 +8,13 @@
             <div class="col-lg-6 col-sm-12">
                 <div style="margin-right:30px">
                     <p class="title" style="margin-top: 100px; margin-bottom: 30px">Edit comment of "<%= campground.name %>"</p>
-                    <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST"> 
+                    <form action="/pinkbeauty/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST"> 
                         <label class="mb-0">Comment: </label>
                         <textarea class="login-text" name="comment[text]" rows="5"><%= comment.text %></textarea>
                         <div>
                             <button>Update</button>
                         </div>
-                        <a href="/campgrounds/<%= campground._id %>">go back</a>
+                        <a href="/pinkbeauty/<%= campground._id %>">go back</a>
                     </form> 
                 </div>
             </div>
