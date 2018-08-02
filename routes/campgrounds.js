@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middlewareObj = require("../middleware");
+var User = require("../models/user.js")
 
 var NodeGeocoder = require('node-geocoder');
 
@@ -79,12 +80,13 @@ router.get("/new", middlewareObj.isLoggedIn, function(req, res){
 router.get("/:id", function(req, res){
     //find campground with provided id
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+        // eval(require("locus"));
         if(err || !foundCampground){
             req.flash("error", "Campground not found");
             res.redirect("/campgrounds");
         } else {
-            //render show template with that campground
-            res.render("campgrounds/show",{campground: foundCampground}); 
+            // render show template with that campground
+            res.render("campgrounds/show",{campground: foundCampground});
         }
     });
 

@@ -1,21 +1,24 @@
-<% include ../partials/header %>
-<div class="container">
-    <div class="text-center">
-        <h1 class="h3 my-5 font-weight-normal">Edit comment of "<%= campground.name %>"</h1>
-    </div>
-    <div style="width:30%; margin:25px auto;">
-        <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST"> 
-            <div class="form-group">
-                <label>Comment</label>
-                <textarea class="form-control" name="comment[text]" rows="5"><%= comment.text %></textarea>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block">Submit</button>
-            </div>
-        </form>
-        <a href="/campgrounds/<%= campground._id %>">go back</a>
-    </div>
-</div>
+<% include ../partials/post_header %>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-none d-lg-block">
+                <img class="login-image" style="width:400px;" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f60d3baea4a9463138743b01c0011045&auto=format&fit=crop&w=900&q=60">
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div style="margin-right:30px">
+                    <p class="title" style="margin-top: 100px; margin-bottom: 30px">Edit comment of "<%= campground.name %>"</p>
+                    <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST"> 
+                        <label class="mb-0">Comment: </label>
+                        <textarea class="login-text" name="comment[text]" rows="5"><%= comment.text %></textarea>
+                        <div>
+                            <button>Update</button>
+                        </div>
+                        <a href="/campgrounds/<%= campground._id %>">go back</a>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>

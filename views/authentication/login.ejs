@@ -1,26 +1,25 @@
-<% include ../partials/header %>
+<% include ../partials/auth_header %>
 
-        <div class="container mb-50">
-            <div class="text-center">
-                <h1 class="h3 my-5 font-weight-normal">Login</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-none d-lg-block">
+                <img class="login-image" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f60d3baea4a9463138743b01c0011045&auto=format&fit=crop&w=900&q=60">
             </div>
-            <div style="width:30%; margin: 25px auto;">
-                <form action="/login" method="POST">
-                    <div class="form-group">
-                        <label>Username </label>
-                        <input class="form-control" type="text" name="username" placeholder="username" required> 
-                    </div>
-                    <div class="form-group"> 
-                        <label>Password</label>
-                        <input class="form-control" type="password" name="password" placeholder="password" required>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-lg btn-primary btn-block">Submit</button>
-                    </div>
-                    <span><a href="/forgot">Forgot Password?</a></span>
-                </form> 
+            <div class="col-lg-6 col-sm-12">
+                <div style="margin-right:30px">
+                    <p class="title">ACCOUNT LOGIN</p>
+                    <form action="/login" method="POST">
+                        <input class="login-text" type="text" name="username" placeholder="username" required> 
+                        <input class="login-text" type="password" name="password" placeholder="password" required>
+                        <div>
+                            <button>SIGN IN</button>
+                        </div>
+                        <p class="forgot"><a class="forgot-text"href="/forgot">Forgot <span>Password?</span></a></p>
+                    </form> 
+                </div>
             </div>
         </div>
-
+    </div>
+    
     </body>
 </html>

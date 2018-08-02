@@ -2,19 +2,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">YelpCamp</p>
+            <p class="lead title-font-med mt-3"><i class="hand thumbs up outline icon"></i>Editor's Recommendation</p>
             <div class="list-group">
-                <li class="list-group-item active">Info1</li>
-                <li class="list-group-item ">Info2</li>
-                <li class="list-group-item ">Info3</li>
+                <button type="button" class="list-group-item list-group-item-action">
+                    Editor's Recommendation
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+                <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+                <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+                <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros</button>
             </div>
-            <div class="mt-4" id="map"></div>
+            <div>
+                <p class="lead title-font-med" style="margin-top: 30px;"><i class="map marker alternate icon"></i>Store Location</p>
+                <div class="mt-4" style="margin-top:2px" id="map"></div>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="card mb-3">
-                <img class="card-img-top show" style="height:100%" src="<%= campground.image %>" alt="Card image cap">
+                <img class="card-img-top show" style="display:block; max-width: 100%; max-height:700px; height:auto;" src="<%= campground.image %>" alt="Card image cap">
                 <div class="card-body">
-                    <p class="float-right">$<%= Number(campground.price).toFixed(2) %>/Night</p>
+                    <p class="float-right"><i class="dollar sign icon"></i><%= Number(campground.price).toFixed(2) %></p>
                     <p class="card-text" id="campgroundName"><strong><%= campground.name %></strong></p>
                     <p>
                         <em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a>, <%= moment(campground.createAt).fromNow() %></em>
@@ -29,16 +36,29 @@
                 </div>
                 <hr>
                 
-                <div class="text-right mb-3">
-                       <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-success">Add a new comment</a>
+                <div class="mb-2">
+                    <span><div class="square"></div></span><span class="comment-title">Comments</span>
                 </div>
-                <% campground.comments.forEach(function(comment){ %>
+                <div class="mb-3 ml-3">
+                    <a href="/campgrounds/<%= campground._id %>/comments/new" style="color: black">
+                        <i class="comment outline icon" style="float:left"></i><span>Add a new comment</span>
+                    </a>
+                </div>
+                
+                <% campground.comments.forEach(function(comment, index){ %>
                     <div class="col-md-12 mb-4">
-                        <p class="card-text mb-1">
-                            <strong><%= comment.author.username %></strong>
-                            <span class="float-right"><%= moment(comment.createAt).fromNow() %></span> 
+                        <p class="mb-0">
+                            <div>
+                            <img src="<%= comment.author.avatar %>" class="mr-3 comment_avatar">
+                            </div>
+                            <div>
+                            <p class="mb-0"><strong><%= comment.author.username %></strong></p>
+                            <p class="mt-1"><%= moment(comment.createAt).fromNow() %></p> 
+                            </div>
                         </p>
-                        <p class="card-text"><%= comment.text %></p>
+
+                        
+                        <p class="card-text comment-text"><%= comment.text %></p>
                         <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                             <a href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
                                 <button class="btn btn-sm btn-warning">Edit</button>
@@ -47,8 +67,12 @@
                                 <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         <% } %>
+                        <% if(index !== campground.comments.length-1){ %>
+                            <hr>
+                        <% } %>
                     </div>
                 <% }); %>
+                
             </div>
         </div>
     </div>

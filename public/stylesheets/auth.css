@@ -1,0 +1,60 @@
+/*====================Login Page===================*/
+.login-image{
+  max-width:100%; 
+  max-height:75%; 
+  margin-left:30px
+}
+p.title{
+    text-align:center; 
+    margin-top: 150px; 
+    margin-bottom:50px; 
+    font-size:1.5em;
+    color:#63666b;
+}
+.login-text {
+  width: 49%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.login-text:focus {
+  border: 2px solid #FFDED5;
+}
+button{
+  width:98.5%;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #FFDED5;
+  border: 1px solid #FFDED5;
+  border-radius: 4px;
+  color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+button:hover{
+  background-color: #424041;
+  border: 1px solid #424041;
+}
+.forgot{
+  margin:15px auto;
+  text-align: center;
+  font-size: 0.9em;
+}
+.forgot-text{
+  color: #7d8c9b;
+}
+.forgot-text span{
+  color: pink;
+}
+.forgot-text span:hover{
+  color: #7d8c9b;
+  text-decoration: none;
+}
+.forgot-text:hover{
+  color: #7d8c9b;
+}

@@ -13,6 +13,37 @@ body {
   color: #fff;
 }
 
+#brand{
+  font-family: 'Raleway', sans-serif;
+  font-weight:700;
+  font-size: 5em;
+  animation: brandAnimation 15s linear infinite;
+  text-shadow:0 0 0.2em #F87, 0 0 0.2em #F87;
+}
+
+.button {
+  width: 180px;
+  height: 50px;
+  font-family: 'Raleway', sans-serif;;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1.6px;
+  color: white;
+  background-color: pink;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #0abab5;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  transform: translateY(-7px);
+}
+
 .slideshow { 
   position: fixed;
   width: 100%;
@@ -36,27 +67,49 @@ body {
   background-repeat: no-repeat;
   opacity: 0;
   z-index: 0;
-  animation: imageAnimation 50s linear infinite; 
+  animation: imageAnimation 15s linear infinite; 
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(https://images.unsplash.com/photo-1510924199351-4e9d94df18a6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=96948d1b6b94c804f63f9956ca0bfd22&auto=format&fit=crop&w=900&q=60) 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
-  animation-delay: 10s; 
+  background-image: url(https://images.unsplash.com/photo-1487412912498-0447578fcca8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d2f5a62e9061b2188b383b688e24f2ac&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 3s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
-  animation-delay: 20s; 
+  background-image: url(https://images.unsplash.com/photo-1503236823255-94609f598e71?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=885d5cb5256c28487047895a4161452f&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 6s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
-  animation-delay: 30s; 
+  background-image: url(http://images.unsplash.com/photo-1512207855369-643452a63d46?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc5bff6cc7189ffa34d8a56aded1d289&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 9s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
-  animation-delay: 40s; 
+  background-image: url(https://images.unsplash.com/photo-1518691340140-512e66ce957b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7f4199bcd7641464c5dfe84cfdb6cce4&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 12s; 
+}
+
+@keyframes brandAnimation{
+  0% {
+    color: #ff4d4d;
+    animation-timing-function: ease-in;
+  }
+  30% {
+    color: white;
+  }
+  60% {
+    color: #ffcc66;
+  }
+  80% {
+    color: white;
+  }
+  90% {
+    color: #0abab5;
+  }
+  100%{
+    color: #ff4d4d;
+  }
 }
 
 @keyframes imageAnimation { 
